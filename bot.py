@@ -18,9 +18,9 @@ OXAAM_EMAIL = os.getenv("OXAAM_USER_EMAIL")
 OXAAM_PASSWORD = os.getenv("OXAAM_USER_PASSWORD")
 
 # Proxy environment variables
-PROXY_SERVER = os.getenv("PROXY_SERVER")         # مثل: http://brd.superproxy.io:33335
-PROXY_USER = os.getenv("PROXY_USER")             # یوزرنیم برواد
-PROXY_PASS = os.getenv("PROXY_PASS")             # پسورد برواد
+PROXY_SERVER = os.getenv("PROXY_SERVER")   # مثل: http://brd.superproxy.io:33335
+PROXY_USER = os.getenv("PROXY_USER")       # یوزرنیم پراکسی
+PROXY_PASS = os.getenv("PROXY_PASS")       # پسورد پراکسی
 
 LOGIN_URL = "https://www.oxaam.com/login.php"
 
@@ -49,7 +49,8 @@ def require_env() -> None:
 @asynccontextmanager
 async def browser_context():
     """
-    Create an async Playwright browser context with proxy support.
+    Create an async Playwright browser context with proxy support
+    and ignore SSL errors to prevent ERR_CERT_AUTHORITY_INVALID.
     """
     async with async_playwright() as p:
         proxy_settings = {
@@ -60,9 +61,12 @@ async def browser_context():
 
         browser = await p.chromium.launch(
             headless=True,
-            args=["--no-sandbox"],
+            args=["--no-sandbox", "--ignore-certificate-errors"]
         )
-        context = await browser.new_context(proxy=proxy_settings)
+        context = await browser.new_context(
+            proxy=proxy_settings,
+            ignore_https_errors=True
+        )
         try:
             yield context
         finally:
