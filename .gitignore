@@ -1,0 +1,6 @@
+# Ignore sensitive files and build artifacts
+.env
+__pycache__/
+*.pyc
+.playwright/
+dist/
