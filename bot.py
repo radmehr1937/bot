@@ -13,10 +13,10 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 load_dotenv()
 
 # Grab required environment variables. The bot will exit if any are missing.
-BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-ALLOWED_CHAT_ID = int(os.getenv("ALLOWED_CHAT_ID", "0"))
-OXAAM_EMAIL = os.getenv("OXAAM_USER_EMAIL")
-OXAAM_PASSWORD = os.getenv("OXAAM_USER_PASSWORD")
+BOT_TOKEN = os.getenv("6174342104:AAETQgzYTICspksNy6-1EOG-EBtXUU3JgfM")
+ALLOWED_CHAT_ID = int(os.getenv("1556793234", "0"))
+OXAAM_EMAIL = os.getenv("akbari.radmehr@gmail.com")
+OXAAM_PASSWORD = os.getenv("@2BYmtdD@#w8S7y")
 
 # Target URL for logging into Oxaam
 LOGIN_URL = "https://www.oxaam.com/login.php"
